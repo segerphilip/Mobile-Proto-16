@@ -22,11 +22,41 @@ public class Farm {
     }
 
     public ArrayList<Animal> getHeaviestAnimals() {
-        ArrayList<Animal> heavy = animals;
+
+        // So, this is why your code didn't pass all of the tests.
+        // You actually skipped two steps here. Firstly, you  weren't
+        // supposed to modify the underlying arraylist.
+        // Secondly, you don't actually end up specifying the sort criteria.
+        // I'm not sure what this will sort it by, but my guess is that it
+        // is definitely not weight!
+
+        ArrayList<Animal> heavy = animals; // This just makes a pointer to
+        // the original Arraylist!
 
         // Maybe skipping some steps, but...
-        Collections.sort(heavy);
+        Collections.sort(heavy); // What is the sort criteria here?
         Collections.reverse(heavy);
+
+        // Here is the solution from the solution set. I'd recommend reading it
+        // over to make sure you understand it:
+
+    
+        // public ArrayList<Animal> getHeaviestAnimals() {
+        //     ArrayList<Animal> sorted = new ArrayList<>(animals);
+        //     Collections.sort(sorted, new Comparator<Animal>() {
+        //         @Override
+        //         public int compare(Animal a1, Animal a2)
+        //         {
+        //             double diff = a1.getWeight() - a2.getWeight();
+        //             if (diff < 0)
+        //                 return 1;
+        //             if (diff == 0)
+        //                 return 0;
+        //             return -1;
+        //         }
+        //     });
+        //     return sorted;
+        // }
 
         return heavy;
     }

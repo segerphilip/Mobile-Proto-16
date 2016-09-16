@@ -12,16 +12,14 @@ import android.widget.Button;
  * Fragment handling the settings to change background color
  */
 public class SettingsFragment extends Fragment {
-
-    public SettingsFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        // Get root view to be able to set background color
         final View rootView = getActivity().getWindow().getDecorView();
 
+        // Create buttons for changing background color
         Button myButton1 = (Button) view.findViewById(R.id.settingsButton1);
         Button myButton2 = (Button) view.findViewById(R.id.settingsButton2);
         Button myButton3 = (Button) view.findViewById(R.id.settingsButton3);
@@ -30,6 +28,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("SettingsFragment", "button 1 clicked");
+                // Set rootView background color
                 rootView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         });
@@ -52,5 +51,4 @@ public class SettingsFragment extends Fragment {
 
         return view;
     }
-
 }

@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * A placeholder fragment containing a simple view.
+ * INCLASS work on fragments
  */
 public class MainActivityFragment extends Fragment {
 

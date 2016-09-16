@@ -1,4 +1,4 @@
-package pip.lesson3hw;
+package pip.lesson3HW;
 
 import org.junit.Test;
 

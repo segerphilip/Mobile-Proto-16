@@ -1,4 +1,4 @@
-package pip.lesson3hw;
+package pip.lesson3HW;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

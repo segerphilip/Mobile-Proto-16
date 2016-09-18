@@ -32,16 +32,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);
         transaction.commit();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final NotesFragment notesFragment = (NotesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
-                notesFragment.createNewNote("TESTING");
-                Log.d("MainActivity", "Fab pressed");
-            }
-        });
     }
 
     @Override

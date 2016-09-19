@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,10 @@ public class NotesFragment extends Fragment {
                 notes.remove(i);
             }
         }
+        // this is bad, but it makes the list work
+        // TODO forced garbage collection is not great
+        notesAdapter = new TodoAdapter(getActivity(), notes);
+        noteList.setAdapter(notesAdapter);
         notesAdapter.notifyDataSetChanged();
     }
 

@@ -16,16 +16,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Defines a custom adapter used to display a list of to-do items and a checkbox for complete/incomplete
  */
 public class TodoAdapter extends ArrayAdapter<Item> {
-    @BindView(R.id.todo_item_check) CheckBox itemCheck;
-    @BindView(R.id.todo_item_text) TextView itemText;
-
     public TodoAdapter(Context context, ArrayList<Item> items) {
         super(context, 0, items);
     }
@@ -43,7 +37,8 @@ public class TodoAdapter extends ArrayAdapter<Item> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_item, parent, false);
         }
         // create objects to assign data later
-        ButterKnife.bind(this, convertView);
+        final CheckBox itemCheck = (CheckBox) convertView.findViewById(R.id.todo_item_check);
+        final TextView itemText = (TextView) convertView.findViewById(R.id.todo_item_text);
         // assign Item data
         itemCheck.setActivated(item.isDone());
         itemText.setText(item.getItem());

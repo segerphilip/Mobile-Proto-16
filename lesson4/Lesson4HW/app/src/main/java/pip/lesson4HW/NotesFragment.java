@@ -5,25 +5,27 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Fragment handling the separate to do items in a list
+ * TODO there is a known bug where removing the last todo item and then adding a new one results
+ * in the new one looking as though it is done, however it is not removed because it is not done
  */
 public class NotesFragment extends Fragment {
+    @BindView(R.id.noteList) ListView noteList;
     private ArrayList<Item> notes;
     private TodoAdapter notesAdapter;
-    private ListView noteList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,13 +35,10 @@ public class NotesFragment extends Fragment {
 
         notes = new ArrayList<Item>();
         notesAdapter = new TodoAdapter(getActivity(), notes);
+        ButterKnife.bind(this, view);
+        // TODO this seems like butterknife is doing less than expected
         noteList = (ListView) view.findViewById(R.id.noteList);
         noteList.setAdapter(notesAdapter);
-
-        Item it1 = new Item(false, "test");
-        Item it2 = new Item(false, "tlksjdsf");
-        notes.add(it1);
-        notes.add(it2);
 
         // fab used to add completely new notes
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -53,18 +52,16 @@ public class NotesFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Removes checked to-do items and clears them from the adapter
+     */
     public void clearDone() {
-        // using a while loop because removing items from arraylist changes index of contents
-        int i = 0;
-        while (i < notes.size()) {
+        for (int i = notes.size() - 1; i >= 0; i--) {
             Item toRemove = notes.get(i);
             if (toRemove.isDone()) {
                 notes.remove(i);
-            } else {
-                i++;
             }
         }
-
         notesAdapter.notifyDataSetChanged();
     }
 
@@ -91,6 +88,7 @@ public class NotesFragment extends Fragment {
         AlertDialog visibleAlert = alert.create();
         // popup the soft keyboard when the alert dialog opens, close when alert dialog closes
         visibleAlert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        notesAdapter.notifyDataSetChanged();
         visibleAlert.show();
     }
 }

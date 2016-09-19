@@ -8,10 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Fragment handling the settings to change background color
  */
 public class SettingsFragment extends Fragment {
+    @BindView(R.id.settingsButton1) Button myButton1;
+    @BindView(R.id.settingsButton2) Button myButton2;
+    @BindView(R.id.settingsButton3) Button myButton3;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -20,6 +27,9 @@ public class SettingsFragment extends Fragment {
         final View rootView = getActivity().getWindow().getDecorView();
 
         // Create buttons for changing background color
+        // TODO this is definitely wrong for butterknife
+        ButterKnife.bind(this, view);
+        // TODO need to assign buttons using findViewById, otherwise app crashes here
         Button myButton1 = (Button) view.findViewById(R.id.settingsButton1);
         Button myButton2 = (Button) view.findViewById(R.id.settingsButton2);
         Button myButton3 = (Button) view.findViewById(R.id.settingsButton3);

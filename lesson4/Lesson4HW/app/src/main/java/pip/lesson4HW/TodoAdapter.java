@@ -16,12 +16,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Defines a custom adapter used to display a list of to-do items and a checkbox for complete/incomplete
  */
 public class TodoAdapter extends ArrayAdapter<Item> {
-    public TodoAdapter(Context context, ArrayList<Item> users) {
-        super(context, 0, users);
+    @BindView(R.id.todo_item_check) CheckBox itemCheck;
+    @BindView(R.id.todo_item_text) TextView itemText;
+
+    public TodoAdapter(Context context, ArrayList<Item> items) {
+        super(context, 0, items);
     }
 
     /**
@@ -37,6 +43,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_item, parent, false);
         }
         // create objects to assign data later
+        ButterKnife.bind(this, convertView);
         final CheckBox itemCheck = (CheckBox) convertView.findViewById(R.id.todo_item_check);
         final TextView itemText = (TextView) convertView.findViewById(R.id.todo_item_text);
         // assign Item data
@@ -46,6 +53,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
         itemCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // if item is done, check its box and cross out its text
                 if (!item.isDone()) {
                     item.setDone(true);
                     itemCheck.setActivated(true);
@@ -55,6 +63,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
                     itemCheck.setActivated(false);
                     itemText.setPaintFlags(itemText.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 }
+                Log.d("TodoAdapter", "this " + itemCheck.isActivated());
             }
         });
 
@@ -69,6 +78,9 @@ public class TodoAdapter extends ArrayAdapter<Item> {
         return convertView;
     }
 
+    /**
+     * Creates an alert dialog to edit preexisting values in the listview
+     */
     public void createAlertDialog(final Item item) {
         final String prevText = item.getItem();
         final EditText input = new EditText(getContext());

@@ -1,13 +1,10 @@
 package pip.lesson4HW;
 
-import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -32,49 +28,39 @@ public class NotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
-        // Create all the necessary text boxes for the "to-do" list
+        // create all the necessary text boxes for the "to-do" list
 
+        // create a list to add values to
         noteList = (ListView) view.findViewById(R.id.noteList);
         notes = new ArrayList<String>();
         notesAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, notes);
         noteList.setAdapter(notesAdapter);
-        notes.add("First Item");
-        notes.add("Second Item");
 
+        // if an item is clicked, edit it
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-                notes.get(position);
-                notes.set(position, "new value");
-                notesAdapter.notifyDataSetChanged();
+                createAlertDialog(notes.get(position), position);
             }
         });
 
+        // fab used to add completely new notes
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAlertDialog(null);
+                // pass in null and -1 because not preexisting note
+                createAlertDialog(null, -1);
             }
         });
 
         return view;
     }
 
-    private View.OnClickListener textNote(final TextView text) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("NotesFragment", "TextView clicked" + text);
-                createAlertDialog(text);
-            }
-        };
-    }
-
     /**
-     * Creates an alert dialog with editable text box and saves the changes in the clicked note
+     * Creates an alert dialog with editable text box and saves the changes in the clicked note or new note
      */
-    private void createAlertDialog(String text) {
+    private void createAlertDialog(final String text, final int loc) {
         final EditText input = new EditText(getContext());
         // set the initial text when the alert dialog pops up if it is not new
         if (text != null) {
@@ -92,8 +78,15 @@ public class NotesFragment extends Fragment {
                 .setPositiveButton(R.string.popupConfirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // set the note text when click Done
-                        notes.add(input.getText().toString());
+                        if (text == null && loc == -1) {
+                            // set the note text if not editing when click Done
+                            notes.add(input.getText().toString());
+                        } else {
+                            // set the specific note's new value from preexisting position
+                            notes.set(loc, input.getText().toString());
+                            // update the view to incorporate changes
+                            notesAdapter.notifyDataSetChanged();
+                        }
                     }
                 });
 

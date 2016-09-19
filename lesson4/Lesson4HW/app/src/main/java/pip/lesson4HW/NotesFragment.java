@@ -36,6 +36,11 @@ public class NotesFragment extends Fragment {
         noteList = (ListView) view.findViewById(R.id.noteList);
         noteList.setAdapter(notesAdapter);
 
+        Item it1 = new Item(false, "test");
+        Item it2 = new Item(false, "tlksjdsf");
+        notes.add(it1);
+        notes.add(it2);
+
         // fab used to add completely new notes
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,12 +54,17 @@ public class NotesFragment extends Fragment {
     }
 
     public void clearDone() {
-        for (int i = 0; i < notes.size(); i++) {
+        // using a while loop because removing items from arraylist changes index of contents
+        int i = 0;
+        while (i < notes.size()) {
             Item toRemove = notes.get(i);
             if (toRemove.isDone()) {
-                notesAdapter.remove(toRemove);
+                notes.remove(i);
+            } else {
+                i++;
             }
         }
+
         notesAdapter.notifyDataSetChanged();
     }
 

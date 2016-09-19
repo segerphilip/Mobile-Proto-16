@@ -44,8 +44,6 @@ public class TodoAdapter extends ArrayAdapter<Item> {
         }
         // create objects to assign data later
         ButterKnife.bind(this, convertView);
-        final CheckBox itemCheck = (CheckBox) convertView.findViewById(R.id.todo_item_check);
-        final TextView itemText = (TextView) convertView.findViewById(R.id.todo_item_text);
         // assign Item data
         itemCheck.setActivated(item.isDone());
         itemText.setText(item.getItem());

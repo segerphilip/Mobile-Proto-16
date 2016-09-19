@@ -27,12 +27,7 @@ public class SettingsFragment extends Fragment {
         final View rootView = getActivity().getWindow().getDecorView();
 
         // Create buttons for changing background color
-        // TODO this is definitely wrong for butterknife
         ButterKnife.bind(this, view);
-        // TODO need to assign buttons using findViewById, otherwise app crashes here
-        Button myButton1 = (Button) view.findViewById(R.id.settingsButton1);
-        Button myButton2 = (Button) view.findViewById(R.id.settingsButton2);
-        Button myButton3 = (Button) view.findViewById(R.id.settingsButton3);
 
         myButton1.setOnClickListener(new View.OnClickListener() {
             @Override

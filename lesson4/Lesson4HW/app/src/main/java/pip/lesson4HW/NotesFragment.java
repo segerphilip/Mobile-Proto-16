@@ -36,8 +36,6 @@ public class NotesFragment extends Fragment {
         notes = new ArrayList<Item>();
         notesAdapter = new TodoAdapter(getActivity(), notes);
         ButterKnife.bind(this, view);
-        // TODO this seems like butterknife is doing less than expected
-        noteList = (ListView) view.findViewById(R.id.noteList);
         noteList.setAdapter(notesAdapter);
 
         // fab used to add completely new notes

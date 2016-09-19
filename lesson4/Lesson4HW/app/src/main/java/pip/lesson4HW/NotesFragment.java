@@ -44,12 +44,9 @@ public class NotesFragment extends Fragment {
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-                Log.d("NotesFragment", "List item clicked at " + position);
-                String noteValue = (String) adapter.getItemAtPosition(position);
-                Log.d("NotesFragment", "Text is " + noteValue);
-                noteValue = "new valeu";
-                noteList.invalidateViews();
-                noteList.refreshDrawableState();
+                notes.get(position);
+                notes.set(position, "new value");
+                notesAdapter.notifyDataSetChanged();
             }
         });
 
@@ -57,7 +54,6 @@ public class NotesFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("MainActivity", "Fab pressed");
                 createAlertDialog(null);
             }
         });
@@ -78,13 +74,13 @@ public class NotesFragment extends Fragment {
     /**
      * Creates an alert dialog with editable text box and saves the changes in the clicked note
      */
-    private void createAlertDialog(TextView text) {
+    private void createAlertDialog(String text) {
         final EditText input = new EditText(getContext());
         // set the initial text when the alert dialog pops up if it is not new
         if (text != null) {
-            input.setText(text.getText().toString());
+            input.setText(text);
             // select all the text and popup the keyboard to easily re-edit note
-            input.setSelection(text.getText().length());
+            input.setSelection(text.length());
         }
         // set focus and popup keyboard
         input.setSelectAllOnFocus(true);

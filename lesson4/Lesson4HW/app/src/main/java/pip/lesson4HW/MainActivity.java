@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // create to-do items fragment and add it to current activity
         final NotesFragment newFragment = new NotesFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
+        transaction.replace(R.id.fragment, newFragment, "notesFragment");
         transaction.commit();
     }
 
@@ -41,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             SettingsFragment newFragment = new SettingsFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment, newFragment);
+            transaction.replace(R.id.fragment, newFragment, "settingsFragment");
             transaction.addToBackStack(null);
             transaction.commit();
+        }
+
+        if (id == R.id.action_remove) {
+            NotesFragment loadedFragment = (NotesFragment) getSupportFragmentManager().findFragmentByTag("notesFragment");
+            loadedFragment.clearDone();
         }
 
         return super.onOptionsItemSelected(item);

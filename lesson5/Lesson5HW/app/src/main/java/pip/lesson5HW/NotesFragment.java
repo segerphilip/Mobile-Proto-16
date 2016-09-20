@@ -19,8 +19,6 @@ import butterknife.ButterKnife;
 
 /**
  * Fragment handling the separate to do items in a list
- * TODO there is a known bug where removing the last todo item and then adding a new one results
- * in the new one looking as though it is done, however it is not removed because it is not done
  */
 public class NotesFragment extends Fragment {
     @BindView(R.id.noteList) ListView noteList;
@@ -60,6 +58,10 @@ public class NotesFragment extends Fragment {
                 notes.remove(i);
             }
         }
+        // this is bad, but it makes the list work
+        // TODO forced garbage collection is not great
+        notesAdapter = new TodoAdapter(getActivity(), notes);
+        noteList.setAdapter(notesAdapter);
         notesAdapter.notifyDataSetChanged();
     }
 

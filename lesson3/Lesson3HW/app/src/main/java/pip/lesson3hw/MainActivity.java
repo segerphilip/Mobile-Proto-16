@@ -1,4 +1,4 @@
-package pip.lesson3HW;
+package pip.lesson3hw;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import pip.lesson3HW.R;
 
 /**
  * Main activity which loads either a to-do fragment, or changes to settings fragment
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Create to-do items fragment and add it to current activity
-        NotesFragment newFragment = new NotesFragment();
+        pip.lesson3HW.NotesFragment newFragment = new pip.lesson3HW.NotesFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);
         transaction.commit();
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // When settings dropdown clicked, switch current fragment to settings fragment
         if (id == R.id.action_settings) {
-            SettingsFragment newFragment = new SettingsFragment();
+            pip.lesson3HW.SettingsFragment newFragment = new pip.lesson3HW.SettingsFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment, newFragment);
             transaction.addToBackStack(null);

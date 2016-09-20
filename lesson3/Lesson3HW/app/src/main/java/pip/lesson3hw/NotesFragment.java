@@ -27,6 +27,7 @@ public class NotesFragment extends Fragment {
         final TextView text4 = (TextView) view.findViewById(R.id.fragmentNote4);
         final TextView text5 = (TextView) view.findViewById(R.id.fragmentNote5);
 
+        // Niceeeeeeee
         text1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

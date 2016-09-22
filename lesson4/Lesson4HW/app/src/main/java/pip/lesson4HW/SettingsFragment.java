@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
  * Fragment handling the settings to change background color
  */
 public class SettingsFragment extends Fragment {
+    // Use TAG for better Log practice:
+    private static final String TAG = SettingsFragment.class.getName();
+
     @BindView(R.id.settingsButton1) Button myButton1;
     @BindView(R.id.settingsButton2) Button myButton2;
     @BindView(R.id.settingsButton3) Button myButton3;
@@ -32,7 +35,8 @@ public class SettingsFragment extends Fragment {
         myButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 1 clicked");
+                // Use TAG here
+                Log.d(TAG, "button 1 clicked");
                 // Set rootView background color
                 rootView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             }
@@ -41,7 +45,7 @@ public class SettingsFragment extends Fragment {
         myButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 2 clicked");
+                Log.d(TAG, "button 2 clicked");
                 rootView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
         });
@@ -49,7 +53,7 @@ public class SettingsFragment extends Fragment {
         myButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 3 clicked");
+                Log.d(TAG, "button 3 clicked");
                 rootView.setBackgroundColor(getResources().getColor(R.color.colorWrong));
             }
         });

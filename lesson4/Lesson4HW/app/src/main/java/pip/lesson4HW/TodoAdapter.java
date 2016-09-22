@@ -20,6 +20,8 @@ import java.util.ArrayList;
  * Defines a custom adapter used to display a list of to-do items and a checkbox for complete/incomplete
  */
 public class TodoAdapter extends ArrayAdapter<Item> {
+    private static final String TAG = TodoAdapter.class.getName();
+
     public TodoAdapter(Context context, ArrayList<Item> items) {
         super(context, 0, items);
     }
@@ -56,7 +58,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
                     itemCheck.setActivated(false);
                     itemText.setPaintFlags(itemText.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 }
-                Log.d("TodoAdapter", "this " + itemCheck.isActivated());
+                Log.d(TAG, "this " + itemCheck.isActivated());
             }
         });
 
@@ -89,7 +91,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext())
                 .setMessage(R.string.editableText)
                 .setView(input)
-                .setCancelable(true)
+                .setCancelable(true) // Nice
                 .setPositiveButton(R.string.popupConfirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

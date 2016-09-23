@@ -24,7 +24,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="pip.lesson3HW.NotesFragment"
+        android:name="pip.lesson4HW.NotesFragment"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/fragment">
     </FrameLayout>

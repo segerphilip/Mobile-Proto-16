@@ -29,8 +29,8 @@ public class NotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
-        // create all the necessary text boxes for the "to-do" list
 
+        // create all the necessary text boxes for the "to-do" list
         notes = new ArrayList<Item>();
         notesAdapter = new TodoAdapter(getActivity(), notes);
         ButterKnife.bind(this, view);

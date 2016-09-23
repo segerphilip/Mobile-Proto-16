@@ -1,5 +1,7 @@
 package pip.lesson5HW;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +13,18 @@ import android.view.MenuItem;
  * Main activity which loads either a to-do fragment, or changes to settings fragment
  */
 public class MainActivity extends AppCompatActivity {
+    private static final String PREFS = "SavedSettings";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedPreferences sharedPref = getSharedPreferences(PREFS, 0);
+        int backgroundColor = sharedPref.getInt(PREFS, R.color.defaultBackground);
+        getWindow().getDecorView().setBackgroundColor(backgroundColor);
 
         // create to-do items fragment and add it to current activity
         final NotesFragment newFragment = new NotesFragment();

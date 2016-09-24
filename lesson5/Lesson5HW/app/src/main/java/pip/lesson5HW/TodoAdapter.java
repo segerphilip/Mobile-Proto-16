@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,6 @@ public class TodoAdapter extends ArrayAdapter<Item> {
                     itemCheck.setActivated(false);
                     itemText.setPaintFlags(itemText.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 }
-                Log.d("TodoAdapter", "this " + itemCheck.isActivated());
             }
         });
 

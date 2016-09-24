@@ -3,7 +3,6 @@ package pip.lesson5HW;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,34 +23,37 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        // Get root view to be able to set background color
+        // get root view to be able to set background color
         final View rootView = getActivity().getWindow().getDecorView();
 
-        // Create buttons for changing background color
+        // create buttons for changing background color
         ButterKnife.bind(this, view);
 
         myButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 1 clicked");
-                // Set rootView background color
+                // set rootView background color
                 rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                // save the new background color in shared prefs in MainActivity
+                ((MainActivity) getActivity()).editPrefs(R.color.colorPrimaryDark);
             }
         });
 
         myButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 2 clicked");
                 rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                // save the new background color in shared prefs in MainActivity
+                ((MainActivity) getActivity()).editPrefs(R.color.colorAccent);
             }
         });
 
         myButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("SettingsFragment", "button 3 clicked");
                 rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWrong));
+                // save the new background color in shared prefs in MainActivity
+                ((MainActivity) getActivity()).editPrefs(R.color.colorWrong);
             }
         });
 

@@ -8,4 +8,7 @@
     <string name="fragmentClickButton">What\'s up?!</string>
     <string name="popupConfirm">Done</string>
     <string name="settingButtonColor">Change to this color!</string>
+    <string name="sharedPrefs">SavedSettings</string>
+    <string name="savedBackground">#FFFFFFFF</string>
+    <string name="defaultBackground">#FFFFFFFF</string>
 </resources>

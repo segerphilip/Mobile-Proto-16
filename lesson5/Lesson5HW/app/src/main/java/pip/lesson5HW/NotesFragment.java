@@ -1,6 +1,8 @@
 package pip.lesson5HW;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,11 +26,13 @@ public class NotesFragment extends Fragment {
     @BindView(R.id.noteList) ListView noteList;
     private ArrayList<Item> notes;
     private TodoAdapter notesAdapter;
+    private NoteReaderDbHelper mHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
+        mHelper = new NoteReaderDbHelper(this);
 
         // create all the necessary text boxes for the "to-do" list
         notes = new ArrayList<Item>();
@@ -81,6 +85,15 @@ public class NotesFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Item newItem = new Item(false, input.getText().toString());
+                        String task = String.valueOf(input.getText().toString());
+                        SQLiteDatabase db = mHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put(NoteReaderContract.NoteEntry.COL_TASK_TITLE, task);
+                        db.insertWithOnConflict(NoteReaderContract.NoteEntry.TABLE,
+                                null,
+                                values,
+                                SQLiteDatabase.CONFLICT_REPLACE);
+                        db.close();
                         notesAdapter.add(newItem);
                     }
                 });

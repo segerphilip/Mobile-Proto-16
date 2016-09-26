@@ -32,7 +32,7 @@ public class NotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
-        mHelper = new NoteReaderDbHelper(this);
+        mHelper = new NoteReaderDbHelper(getContext());
 
         // create all the necessary text boxes for the "to-do" list
         notes = new ArrayList<Item>();
@@ -88,8 +88,9 @@ public class NotesFragment extends Fragment {
                         String task = String.valueOf(input.getText().toString());
                         SQLiteDatabase db = mHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put(NoteReaderContract.NoteEntry.COL_TASK_TITLE, task);
-                        db.insertWithOnConflict(NoteReaderContract.NoteEntry.TABLE,
+                        values.put(NoteReaderContract.NoteEntry.COLUMN_NAME_NOTE, task);
+                        values.put(NoteReaderContract.NoteEntry.COLUMN_NAME_DONE, task);
+                        db.insertWithOnConflict(NoteReaderContract.NoteEntry.TABLE_NAME,
                                 null,
                                 values,
                                 SQLiteDatabase.CONFLICT_REPLACE);

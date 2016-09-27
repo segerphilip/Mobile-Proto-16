@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout2">
 
         <SearchView
             android:layout_width="match_parent"
@@ -27,34 +28,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:backgroundTint="?attr/colorPrimary"
-        android:tint="@android:color/white" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:paddingTop="16dp"
-        android:paddingLeft="40dp"
         android:text="Search"
         android:textColor="@android:color/darker_gray"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:singleLine="false" />
+        android:paddingBottom="15dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:id="@+id/editText"
+        android:layout_alignBottom="@+id/appBarLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TabHost
         android:layout_width="200dip"
-        android:layout_height="wrap_content">
+        android:layout_height="300dip"
+        android:layout_marginTop="50dp"
+        android:layout_alignTop="@+id/fab"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +62,9 @@
 
             <TabWidget
                 android:id="@android:id/tabs"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
+                android:tabStripEnabled="false"
                 android:layout_height="wrap_content" />
 
             <FrameLayout
@@ -72,7 +73,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/News Feed"
+                    android:id="@+id/Feed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -98,4 +99,28 @@
         </LinearLayout>
     </TabHost>
 
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:backgroundTint="?attr/colorPrimary"
+        android:tint="@android:color/white"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="63dp"
+        android:layout_marginEnd="12dp"
+        app:elevation="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Actual newsfeed content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

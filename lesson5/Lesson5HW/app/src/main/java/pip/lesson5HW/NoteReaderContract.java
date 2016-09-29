@@ -7,9 +7,6 @@ import android.provider.BaseColumns;
  */
 
 public final class NoteReaderContract {
-    // defs for standard db operations
-    public static final String DATABASE_NAME = "NoteReader.db";
-    public static final int DB_VERSION = 1;
 
     // To prevent someone from accidentally instantiating the contract class, private
     private NoteReaderContract() {

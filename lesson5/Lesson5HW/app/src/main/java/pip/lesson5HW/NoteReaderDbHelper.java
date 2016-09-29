@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Helper class to perform db operations
+ * Helper class to perform db operations.
  */
 public class NoteReaderDbHelper extends SQLiteOpenHelper {
     // defs for standard db operations
@@ -45,6 +45,9 @@ public class NoteReaderDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
+    /**
+     * Returns an arraylist of all db entries, as Item.
+     */
     public ArrayList<Item> getAll() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<Item> allItems = new ArrayList<Item>();
@@ -92,6 +95,9 @@ public class NoteReaderDbHelper extends SQLiteOpenHelper {
         return allItems;
     }
 
+    /**
+     * Adds a new item to the db and returns it with an updated id.
+     */
     public Item addItem(Item newItem) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -102,13 +108,14 @@ public class NoteReaderDbHelper extends SQLiteOpenHelper {
 
         db.close();
 
-        return new Item(rowId, newItem.isDone(), newItem.getItem());
+        newItem.setId(rowId);
+
+        return newItem;
     }
 
-    public Item getItem() {
-        return null;
-    }
-
+    /**
+     * Removes a specific item from the db.
+     */
     public void removeItem(Item toRemove) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -119,6 +126,9 @@ public class NoteReaderDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Updates a specific item in the db.
+     */
     public void updateItem(Item toUpdate) {
         SQLiteDatabase db = getWritableDatabase();
 

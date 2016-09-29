@@ -24,9 +24,11 @@ import butterknife.ButterKnife;
 public class TodoAdapter extends ArrayAdapter<Item> {
     @BindView(R.id.todo_item_check) CheckBox itemCheck;
     @BindView(R.id.todo_item_text) TextView itemText;
+    private NoteReaderDbHelper mHelper;
 
-    public TodoAdapter(Context context, ArrayList<Item> items) {
+    public TodoAdapter(Context context, ArrayList<Item> items, NoteReaderDbHelper mHelper) {
         super(context, 0, items);
+        this.mHelper = mHelper;
     }
 
     /**
@@ -60,6 +62,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
                     itemCheck.setActivated(false);
                     itemText.setPaintFlags(itemText.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 }
+                mHelper.updateItem(item);
             }
         });
 
@@ -67,7 +70,6 @@ public class TodoAdapter extends ArrayAdapter<Item> {
             @Override
             public void onClick(View view) {
                 createAlertDialog(item);
-                // set text to a new value
             }
         });
 
@@ -97,6 +99,7 @@ public class TodoAdapter extends ArrayAdapter<Item> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         item.setItem(input.getText().toString());
+                        mHelper.addItem(item);
                     }
                 });
 

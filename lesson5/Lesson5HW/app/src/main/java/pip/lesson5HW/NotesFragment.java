@@ -33,10 +33,8 @@ public class NotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
         mHelper = new NoteReaderDbHelper(getContext());
-
-        // create all the necessary text boxes for the "to-do" list
-        notes = new ArrayList<Item>();
-        notesAdapter = new TodoAdapter(getActivity(), notes);
+        notes = mHelper.getAll();
+        notesAdapter = new TodoAdapter(getActivity(), notes, mHelper);
         ButterKnife.bind(this, view);
         noteList.setAdapter(notesAdapter);
 
@@ -59,12 +57,13 @@ public class NotesFragment extends Fragment {
         for (int i = notes.size() - 1; i >= 0; i--) {
             Item toRemove = notes.get(i);
             if (toRemove.isDone()) {
+                mHelper.removeItem(toRemove);
                 notes.remove(i);
             }
         }
         // this is bad, but it makes the list work
         // TODO forced garbage collection is not great
-        notesAdapter = new TodoAdapter(getActivity(), notes);
+        notesAdapter = new TodoAdapter(getActivity(), notes, mHelper);
         noteList.setAdapter(notesAdapter);
         notesAdapter.notifyDataSetChanged();
     }
@@ -84,7 +83,7 @@ public class NotesFragment extends Fragment {
                 .setPositiveButton(R.string.popupConfirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Item newItem = new Item(false, input.getText().toString());
+                        Item newItem = new Item(0, false, input.getText().toString());
                         String task = String.valueOf(input.getText().toString());
                         SQLiteDatabase db = mHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();

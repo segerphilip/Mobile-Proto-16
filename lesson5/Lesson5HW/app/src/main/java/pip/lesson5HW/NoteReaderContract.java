@@ -14,7 +14,7 @@ public final class NoteReaderContract {
     }
 
     /**
-     * Table content defs
+     * Table content defs.
      */
     public static class NoteEntry implements BaseColumns {
         public static final String TABLE_NAME = "note";

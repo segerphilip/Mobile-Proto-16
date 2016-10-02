@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Method to save the background color using shared preferences, called from SettingsFragment
      */
+    /*
+    A better way of doing this would be to make use of lifecycle methods and only save the background
+    color when the app is quitting/pausing instead of every time the color is changed.
+     */
     public void editPrefs(int color) {
         SharedPreferences sharedPref = getSharedPreferences(getString(
                 R.string.sharedPrefs), Context.MODE_PRIVATE);

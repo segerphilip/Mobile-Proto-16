@@ -35,6 +35,8 @@ public class SettingsFragment extends Fragment {
                 // set rootView background color
                 rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
                 // save the new background color in shared prefs in MainActivity
+
+                // These calls will not be necessary if you only save when the activity is destroyed
                 ((MainActivity) getActivity()).editPrefs(R.color.colorPrimaryDark);
             }
         });

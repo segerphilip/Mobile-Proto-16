@@ -83,10 +83,14 @@ public class NoteReaderDbHelper extends SQLiteOpenHelper {
             int itemDone = cursor.getInt(
                     cursor.getColumnIndexOrThrow(NoteReaderContract.NoteEntry.COLUMN_NAME_DONE));
             // need to convert int from db to boolean for Item
-            boolean isDone = false;
-            if (itemDone == 1) {
-                isDone = true;
-            }
+            /*
+            Only complaining here because we know each other. But this could be a one-liner:
+             */
+            boolean isDone = (itemDone == 1);
+//            boolean isDone = false;
+//            if (itemDone == 1) {
+//                isDone = true;
+//            }
             allItems.add(new Item(itemId, isDone, itemText));
             isLast = cursor.isLast();
             cursor.moveToNext();

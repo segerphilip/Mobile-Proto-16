@@ -63,6 +63,12 @@ public class NotesFragment extends Fragment {
         }
         // this is bad, but it makes the list work
         // TODO forced garbage collection is not great
+
+        /*
+        You shouldn't need to create a new adapter. Instead create a setItems method in the
+        adapter that takes newList and either filter out oldList, or calls something like retainAll
+        to retain the intersection of the two lists
+        */
         notesAdapter = new TodoAdapter(getActivity(), notes, mHelper);
         noteList.setAdapter(notesAdapter);
         notesAdapter.notifyDataSetChanged();
@@ -85,6 +91,11 @@ public class NotesFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Item newItem = new Item(0, false, input.getText().toString());
                         String task = String.valueOf(input.getText().toString());
+
+                        /*
+                        This code should really be in NoteReaderDbHelper. The idea is that your
+                        helper should be the only class talking to the DB.
+                         */
                         SQLiteDatabase db = mHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();
                         values.put(NoteReaderContract.NoteEntry.COLUMN_NAME_NOTE, task);

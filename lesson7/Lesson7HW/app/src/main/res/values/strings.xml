@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Lesson7HW</string>
-    <string name="action_settings">Settings</string>
+    <string name="confirm_text_input">Add</string>
+    <string name="enter_ticker_here">Search for ticker name</string>
 </resources>

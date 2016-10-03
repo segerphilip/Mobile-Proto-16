@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Lesson8HW</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_remove">Remove done</string>
+    <string name="fragmentText">New todo item</string>
+    <string name="newText">New todo item</string>
+    <string name="editableText">Edit todo item</string>
+    <string name="fragmentClickButton">What\'s up?!</string>
+    <string name="popupConfirm">Done</string>
+    <string name="settingButtonColor">Change to this color!</string>
+    <string name="sharedPrefs">SavedSettings</string>
+    <string name="savedBackground">#FFFFFFFF</string>
+    <string name="defaultBackground">#FFFFFFFF</string>
+</resources>

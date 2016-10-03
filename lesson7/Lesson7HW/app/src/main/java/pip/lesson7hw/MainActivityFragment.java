@@ -20,8 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -80,17 +80,18 @@ public class MainActivityFragment extends Fragment {
      * Sends a request to find a stock value. If it fails to find a stock, it shows a not found snackbar.
      */
     private void getStock(String task) {
-        final String jsonResponse = "";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, baseURL.concat(task),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        // parse the response into proper values
                         parseJSON(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar snackbar = Snackbar.make(getView(), "Unable to add stock", Snackbar.LENGTH_LONG);
+                // snackbar to show the user that something went wrong
+                Snackbar snackbar = Snackbar.make(getView(), "Not a valid stock", Snackbar.LENGTH_LONG);
                 View snackbarView = snackbar.getView();
                 snackbarView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
                 snackbar.show();
@@ -101,7 +102,29 @@ public class MainActivityFragment extends Fragment {
         MySingleton.getInstance(this.getActivity()).addToRequestQueue(stringRequest);
     }
 
+    /**
+     * Parses the json response and adds the name and value of a stock to the list adapter view.
+     */
     private void parseJSON(String response) {
-        Log.d(TAG, response);
+        String trimmed = response.substring(5, response.length() - 2);
+        try {
+            JSONObject j = new JSONObject(trimmed);
+            // value at t is the name, value at l is the price
+            String name = j.getString("t");
+            double value = j.getDouble("l");
+            // if the stock name is null, probably doesn't exist in the json and should error
+            if (name != null) {
+                tickersAdapter.add(new Ticker(name, value));
+            } else {
+                // snackbar to show the user that a stock could not be added
+                Snackbar snackbar = Snackbar.make(getView(), "Unable to add stock", Snackbar.LENGTH_LONG);
+                View snackbarView = snackbar.getView();
+                snackbarView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                snackbar.show();
+            }
+        } catch (JSONException e) {
+            // this should never be hit, but if it does things are bad
+            e.printStackTrace();
+        }
     }
 }

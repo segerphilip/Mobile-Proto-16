@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 /**
  * Custom adapter to display the name and value of stock tickers in a mock-listview type of
- * arrangement. Uses two columns to display information nicely.
+ * arrangement.
  */
 
 public class TickerAdapter extends ArrayAdapter<Ticker> {
@@ -42,6 +42,7 @@ public class TickerAdapter extends ArrayAdapter<Ticker> {
         ButterKnife.bind(this, convertView);
 
         tickerName.setText(tick.getName());
+        // set it all caps, because stocks are usually shown that way
         tickerName.setAllCaps(true);
         tickerValue.setText(String.valueOf(tick.getValue()));
 

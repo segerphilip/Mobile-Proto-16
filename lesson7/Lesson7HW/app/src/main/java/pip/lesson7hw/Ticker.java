@@ -6,9 +6,9 @@ package pip.lesson7hw;
 
 public class Ticker {
     private String name;
-    private int value;
+    private double value;
 
-    public Ticker(String name, int value) {
+    public Ticker(String name, double value) {
         this.name = name;
         this.value = value;
     }
@@ -21,7 +21,7 @@ public class Ticker {
         this.name = name;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 

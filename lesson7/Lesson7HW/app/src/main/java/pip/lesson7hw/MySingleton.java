@@ -1,4 +1,4 @@
-package mobile_proto_16.com.myapplication;
+package pip.lesson7hw;
 
 import android.content.Context;
 

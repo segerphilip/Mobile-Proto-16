@@ -43,7 +43,7 @@ public class MainActivityFragment extends Fragment {
         final Context c = this.getContext();
 
         listTickers = (ListView) view.findViewById(R.id.ticker_list);
-        tickers = new ArrayList<Ticker>();
+        tickers = new ArrayList<>();
         tickersAdapter = new TickerAdapter(c, tickers);
         listTickers.setAdapter(tickersAdapter);
 
@@ -106,11 +106,12 @@ public class MainActivityFragment extends Fragment {
      * Parses the json response and adds the name and value of a stock to the list adapter view.
      */
     private void parseJSON(String response) {
+        // Is the response guaranteed to have length > 7?
         String trimmed = response.substring(5, response.length() - 2);
         try {
             JSONObject j = new JSONObject(trimmed);
             // value at t is the name, value at l is the price
-            String name = j.getString("t");
+            String name = j.getString("t"); // Just being picky, but these strings could be private final
             double value = j.getDouble("l");
             // if the stock name is null, probably doesn't exist in the json and should error
             if (name != null) {

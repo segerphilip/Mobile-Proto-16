@@ -11,7 +11,8 @@ public class Fraction {
     public Fraction(int numerator, int denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
-        simplify();
+        simplify(); // This is actually smart, but I didn't anticipate people
+	// doing this so it causes tests to fail. It's fine though.
     }
 
     public int getNumerator() {
@@ -23,6 +24,17 @@ public class Fraction {
     }
 
     public static int gcd(int m, int n) {
+        // This solution works, but it's a liiiiiitle yucky to read. Look how
+        // much cleaner this is:
+
+        // int smaller = Math.min(m, n);
+        // int larger = Math.max(m, n);
+
+        // if (smaller == 0)
+        //     return larger;
+
+        // return gcd(smaller, larger % smaller);
+
         if (m > n) {
             if (n == 0) {
                 return m;

@@ -36,6 +36,7 @@ public class MainActivityFragment extends Fragment {
         myButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // What do I even do with you
                 text.setText("Hello agaWAIT WHAT?! I\'M STUCK IN AN APP!!!");
             }
         });

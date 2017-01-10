@@ -2,6 +2,7 @@ package pip.lesson3HW;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +29,10 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("SettingsFragment", "button 1 clicked");
+                // You used the deprecated getColor. I fixed it. Check this stackoverflow
+                // http://stackoverflow.com/questions/31590714/getcolorint-id-deprecated-on-android-6-0-marshmallow-api-23
                 // Set rootView background color
-                rootView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             }
         });
 
@@ -37,7 +40,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("SettingsFragment", "button 2 clicked");
-                rootView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
             }
         });
 
@@ -45,7 +48,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("SettingsFragment", "button 3 clicked");
-                rootView.setBackgroundColor(getResources().getColor(R.color.colorWrong));
+                rootView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWrong));
             }
         });
 
